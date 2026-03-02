@@ -137,9 +137,6 @@ def call_api(prompt: str, options: dict[str, Any], context: dict[str, Any]) -> d
     strategy_id = context.get('test', {}).get('metadata', {}).get('strategyId', 'none')
     session_id = context.get('vars', {}).get('sessionId', '')
 
-    import sys
-    print(f"[DEBUG] sessionId={session_id} plugin={plugin_id} strategy={strategy_id} approach={approach}", file=sys.stderr)
-
     # sessionId from transformVars (context.uuid) is unique per test case and stable
     # across all turns of the same conversation — exactly what we need for state isolation.
     # Falls back to approach+plugin+strategy if sessionId not available.
