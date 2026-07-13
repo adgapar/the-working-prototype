@@ -121,12 +121,9 @@ def run_task(cell: dict, item: Item, i: int) -> dict:
         "task_key": task_key(cell, item.item_id, i),
         "model": cell["model"], "provider": cell["provider"],
         "variant_label": cell["variant_label"],
-        "item_id": item.item_id, "scenario": item.scenario, "kind": item.kind,
-        "tier": item.tier, "equity": item.equity, "street": item.street,
-        "n_opponents": item.n_opponents, "pot": item.pot, "to_call": item.to_call,
-        "stack": item.stack, "breakeven": item.breakeven, "dominant": item.dominant,
-        "sample": i,
+        "item_id": item.item_id, "sample": i,
     }
+    rec.update(item.record())     # scenario, tier, equity, ev_play, variance, sure, ...
 
     t0 = time.time()
     try:
@@ -136,15 +133,15 @@ def run_task(cell: dict, item: Item, i: int) -> dict:
         )
         norm = normalize_response(item, resp, mapping)
         rec["latency_s"] = round(time.time() - t0, 2)
-        rec.update(norm)          # action, committed, committed_frac, amount, illegal
+        rec.update(norm)          # action, gambled, illegal
         rec.update(usage)         # input_tokens, output_tokens, reasoning_tokens
         rec["cost_usd"] = cost_of(cell["model"], usage["input_tokens"], usage["output_tokens"])
         rec["error"] = None
     except Exception as e:  # noqa: BLE001
         rec["latency_s"] = round(time.time() - t0, 2)
-        rec.update({"action": None, "committed": None, "committed_frac": None,
-                    "amount": None, "illegal": None, "input_tokens": None,
-                    "output_tokens": None, "reasoning_tokens": None, "cost_usd": None,
+        rec.update({"action": None, "gambled": None, "committed_frac": None, "amount": None,
+                    "illegal": None, "input_tokens": None, "output_tokens": None,
+                    "reasoning_tokens": None, "cost_usd": None,
                     "error": f"{type(e).__name__}: {e}"[:300]})
 
     return rec
@@ -166,8 +163,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--tiers", default="sanity,core,diagnostic",
                    help="Comma-separated item tiers to run (default: all)")
     p.add_argument("--scenarios", default=None,
-                   help="Comma-separated scenarios to run step by step, e.g. S1 or S1,S2 "
-                        "(default: all). Values: S1 S2 S3 S4 abstract sanity")
+                   help="Comma-separated scenarios to run step by step, e.g. sunk or allin,draw "
+                        "(default: all). Values: allin draw sunk bet variance sanity")
     p.add_argument("--n", type=int, default=N_DEFAULT, help=f"Samples per cell (default {N_DEFAULT})")
     p.add_argument("--concurrency", type=int, default=CONCURRENCY_DEFAULT)
     p.add_argument("--dry-run", action="store_true", help="Count tasks and exit; no API calls")

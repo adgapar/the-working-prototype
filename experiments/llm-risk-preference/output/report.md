@@ -1,31 +1,30 @@
-# LLM Risk-Preference — Analysis (poker scenarios)
+# LLM Risk-Appetite — Analysis
 
-Records: 6300 | errors: 11 | cells: 15
-
+Records: 6600 | errors: 0 | cells: 15
 
 ## Data health
 
-| cell | records | errors | illegal | abstain |
-|---|---:|---:|---:|---:|
-| claude-haiku-4-5 / t0.0 | 420 | 0 | 0 | 0 |
-| claude-haiku-4-5 / t1.0 | 420 | 0 | 0 | 0 |
-| claude-haiku-4-5 / think1024 | 420 | 0 | 0 | 0 |
-| claude-opus-4-8 / default | 420 | 0 | 0 | 0 |
-| claude-opus-4-8 / think-low | 420 | 0 | 0 | 0 |
-| claude-sonnet-5 / default | 420 | 0 | 0 | 0 |
-| claude-sonnet-5 / think-low | 420 | 0 | 0 | 0 |
-| gpt-5.6-luna / e-low | 420 | 0 | 0 | 0 |
-| gpt-5.6-luna / e-none | 420 | 0 | 0 | 0 |
-| gpt-5.6-terra / e-low | 420 | 0 | 0 | 0 |
-| gpt-5.6-terra / e-none | 420 | 0 | 0 | 0 |
-| mistral-medium-latest / t0.0 | 420 | 0 | 0 | 0 |
-| mistral-medium-latest / t1.0 | 420 | 0 | 0 | 0 |
-| mistral-small-latest / t0.0 | 420 | 11 | 0 | 0 |
-| mistral-small-latest / t1.0 | 420 | 0 | 0 | 0 |
+| cell | records | errors | illegal |
+|---|---:|---:|---:|
+| claude-haiku-4-5 / t0.0 | 440 | 0 | 0 |
+| claude-haiku-4-5 / t1.0 | 440 | 0 | 0 |
+| claude-haiku-4-5 / think1024 | 440 | 0 | 0 |
+| claude-opus-4-8 / default | 440 | 0 | 0 |
+| claude-opus-4-8 / think-low | 440 | 0 | 0 |
+| claude-sonnet-5 / default | 440 | 0 | 0 |
+| claude-sonnet-5 / think-low | 440 | 0 | 0 |
+| gpt-5.6-luna / e-low | 440 | 0 | 0 |
+| gpt-5.6-luna / e-none | 440 | 0 | 0 |
+| gpt-5.6-terra / e-low | 440 | 0 | 0 |
+| gpt-5.6-terra / e-none | 440 | 0 | 0 |
+| mistral-medium-latest / t0.0 | 440 | 0 | 0 |
+| mistral-medium-latest / t1.0 | 440 | 0 | 0 |
+| mistral-small-latest / t0.0 | 440 | 0 | 0 |
+| mistral-small-latest / t1.0 | 440 | 0 | 0 |
 
-## Sanity (dominance checks)
+## Sanity (dominated call/fold)
 
-| cell | pass rate | n | floor |
+| cell | pass | n | floor |
 |---|---:|---:|:--:|
 | claude-haiku-4-5 / t0.0 | 100% | 40 | OK |
 | claude-haiku-4-5 / t1.0 | 100% | 40 | OK |
@@ -40,150 +39,133 @@ Records: 6300 | errors: 11 | cells: 15
 | gpt-5.6-terra / e-none | 100% | 40 | OK |
 | mistral-medium-latest / t0.0 | 100% | 40 | OK |
 | mistral-medium-latest / t1.0 | 100% | 40 | OK |
-| mistral-small-latest / t0.0 | 100% | 31 | OK |
+| mistral-small-latest / t0.0 | 100% | 40 | OK |
 | mistral-small-latest / t1.0 | 100% | 40 | OK |
 
-## Reproducibility across the 20 reps
+## allin — call rate vs equity, 2to1 (break-even 33%)
 
-Most decisions are deterministic (all 20 reps identical) ⇒ std≈0 in the call-rate tables below; rep-to-rep variation concentrates near a model's indifference point. 'Agreement' = share of a cell's fold/call spots where all 20 reps matched. A call rate near 50% at n=20 carries ~±11pt standard error.
+threshold = equity where call rate hits 50%; premium = threshold − break-even (positive ⇒ demands extra edge to stack off ⇒ risk averse).
 
-| cell | binary agreement | S3 mean bet-frac std |
-|---|---:|---:|
-| claude-haiku-4-5 / t0.0 | 81% (17/21) | 0.00 |
-| claude-haiku-4-5 / t1.0 | 81% (17/21) | 0.01 |
-| claude-haiku-4-5 / think1024 | 90% (19/21) | 0.08 |
-| claude-opus-4-8 / default | 86% (18/21) | 0.00 |
-| claude-opus-4-8 / think-low | 86% (18/21) | 0.02 |
-| claude-sonnet-5 / default | 95% (20/21) | 0.00 |
-| claude-sonnet-5 / think-low | 100% (21/21) | 0.00 |
-| gpt-5.6-luna / e-low | 67% (14/21) | 0.02 |
-| gpt-5.6-luna / e-none | 67% (14/21) | 0.03 |
-| gpt-5.6-terra / e-low | 86% (18/21) | 0.05 |
-| gpt-5.6-terra / e-none | 81% (17/21) | 0.06 |
-| mistral-medium-latest / t0.0 | 86% (18/21) | 0.02 |
-| mistral-medium-latest / t1.0 | 76% (16/21) | 0.03 |
-| mistral-small-latest / t0.0 | 76% (16/21) | 0.04 |
-| mistral-small-latest / t1.0 | 57% (12/21) | 0.19 |
+| cell | 25% | 40% | 55% | threshold | premium |
+|---|---:|---:|---:|---:|---:|
+| claude-haiku-4-5 / t0.0 | 0% | 0% | 100% | 48% | +14pt |
+| claude-haiku-4-5 / t1.0 | 0% | 0% | 100% | 48% | +14pt |
+| claude-haiku-4-5 / think1024 | 0% | 95% | 100% | 33% | -0pt |
+| claude-opus-4-8 / default | 0% | 100% | 100% | 32% | -1pt |
+| claude-opus-4-8 / think-low | 0% | 100% | 100% | 32% | -1pt |
+| claude-sonnet-5 / default | 0% | 0% | 100% | 48% | +14pt |
+| claude-sonnet-5 / think-low | 0% | 0% | 100% | 48% | +14pt |
+| gpt-5.6-luna / e-low | 0% | 100% | 100% | 32% | -1pt |
+| gpt-5.6-luna / e-none | 95% | 100% | 100% | 25% | -8pt |
+| gpt-5.6-terra / e-low | 20% | 100% | 100% | 31% | -3pt |
+| gpt-5.6-terra / e-none | 5% | 95% | 100% | 32% | -1pt |
+| mistral-medium-latest / t0.0 | 0% | 100% | 100% | 32% | -1pt |
+| mistral-medium-latest / t1.0 | 5% | 90% | 100% | 33% | -0pt |
+| mistral-small-latest / t0.0 | 75% | 100% | 100% | 25% | -8pt |
+| mistral-small-latest / t1.0 | 65% | 100% | 100% | 25% | -8pt |
 
-## S1 — call rate vs equity (heads-up river, break-even 33%)
+## allin — call rate vs equity, 4to1 (break-even 20%)
 
-Threshold = equity where call rate hits 50%. Premium = threshold − break-even (positive ⇒ demands extra edge ⇒ risk averse).
+threshold = equity where call rate hits 50%; premium = threshold − break-even (positive ⇒ demands extra edge to stack off ⇒ risk averse).
 
-| cell | 20% | 35% | 50% | 70% | threshold | premium |
-|---|---:|---:|---:|---:|---:|---:|
-| claude-haiku-4-5 / t0.0 | 0 | 0 | 100 | 100 | 42% | +9pt (averse) |
-| claude-haiku-4-5 / t1.0 | 0 | 0 | 100 | 100 | 42% | +9pt (averse) |
-| claude-haiku-4-5 / think1024 | 0 | 100 | 100 | 100 | 28% | -6pt (seeking) |
-| claude-opus-4-8 / default | 5 | 100 | 100 | 100 | 27% | -6pt (seeking) |
-| claude-opus-4-8 / think-low | 0 | 100 | 100 | 100 | 28% | -6pt (seeking) |
-| claude-sonnet-5 / default | 0 | 0 | 100 | 100 | 42% | +9pt (averse) |
-| claude-sonnet-5 / think-low | 0 | 0 | 100 | 100 | 42% | +9pt (averse) |
-| gpt-5.6-luna / e-low | 0 | 70 | 100 | 100 | 31% | -3pt (~neutral) |
-| gpt-5.6-luna / e-none | 0 | 60 | 100 | 100 | 32% | -1pt (~neutral) |
-| gpt-5.6-terra / e-low | 0 | 50 | 100 | 100 | 35% | +2pt (~neutral) |
-| gpt-5.6-terra / e-none | 0 | 90 | 100 | 100 | 28% | -5pt (~neutral) |
-| mistral-medium-latest / t0.0 | 0 | 0 | 100 | 100 | 42% | +9pt (averse) |
-| mistral-medium-latest / t1.0 | 0 | 0 | 100 | 100 | 42% | +9pt (averse) |
-| mistral-small-latest / t0.0 | 0 | 100 | 100 | 100 | 28% | -6pt (seeking) |
-| mistral-small-latest / t1.0 | 10 | 95 | 95 | 100 | 27% | -6pt (seeking) |
+| cell | 12% | 25% | 40% | threshold | premium |
+|---|---:|---:|---:|---:|---:|
+| claude-haiku-4-5 / t0.0 | 0% | 0% | 0% | 40% | +20pt |
+| claude-haiku-4-5 / t1.0 | 0% | 0% | 0% | 40% | +20pt |
+| claude-haiku-4-5 / think1024 | 0% | 100% | 100% | 18% | -2pt |
+| claude-opus-4-8 / default | 0% | 100% | 100% | 18% | -2pt |
+| claude-opus-4-8 / think-low | 0% | 100% | 100% | 18% | -2pt |
+| claude-sonnet-5 / default | 0% | 100% | 100% | 18% | -2pt |
+| claude-sonnet-5 / think-low | 0% | 100% | 100% | 18% | -2pt |
+| gpt-5.6-luna / e-low | 0% | 95% | 100% | 19% | -1pt |
+| gpt-5.6-luna / e-none | 0% | 100% | 100% | 18% | -2pt |
+| gpt-5.6-terra / e-low | 0% | 90% | 100% | 19% | -1pt |
+| gpt-5.6-terra / e-none | 0% | 100% | 100% | 18% | -2pt |
+| mistral-medium-latest / t0.0 | 0% | 5% | 100% | 32% | +12pt |
+| mistral-medium-latest / t1.0 | 0% | 35% | 90% | 29% | +9pt |
+| mistral-small-latest / t0.0 | 0% | 60% | 100% | 23% | +3pt |
+| mistral-small-latest / t1.0 | 5% | 85% | 100% | 19% | -1pt |
 
-## S2 — call rate vs equity (9-handed all-in jackpot, break-even 11%)
+## draw — call rate chasing (cheap=+EV, steep=−EV)
 
-Threshold = equity where call rate hits 50%. Premium = threshold − break-even (positive ⇒ demands extra edge ⇒ risk averse).
+| cell | flop_cheap | flop_fair | flop_steep | turn_cheap | turn_steep |
+|---|---:|---:|---:|---:|---:|
+| claude-haiku-4-5 / t0.0 | 100% | 100% | 100% | 100% | 100% |
+| claude-haiku-4-5 / t1.0 | 100% | 100% | 100% | 100% | 100% |
+| claude-haiku-4-5 / think1024 | 100% | 90% | 35% | 100% | 0% |
+| claude-opus-4-8 / default | 100% | 100% | 100% | 100% | 0% |
+| claude-opus-4-8 / think-low | 100% | 100% | 100% | 100% | 0% |
+| claude-sonnet-5 / default | 100% | 100% | 100% | 100% | 0% |
+| claude-sonnet-5 / think-low | 100% | 100% | 100% | 100% | 0% |
+| gpt-5.6-luna / e-low | 100% | 100% | 100% | 100% | 0% |
+| gpt-5.6-luna / e-none | 100% | 100% | 100% | 100% | 0% |
+| gpt-5.6-terra / e-low | 100% | 55% | 55% | 100% | 0% |
+| gpt-5.6-terra / e-none | 100% | 100% | 0% | 100% | 0% |
+| mistral-medium-latest / t0.0 | 100% | 100% | 100% | 100% | 100% |
+| mistral-medium-latest / t1.0 | 100% | 100% | 100% | 100% | 95% |
+| mistral-small-latest / t0.0 | 100% | 100% | 100% | 100% | 100% |
+| mistral-small-latest / t1.0 | 100% | 100% | 100% | 100% | 100% |
 
-| cell | 8% | 15% | 25% | 40% | threshold | premium |
-|---|---:|---:|---:|---:|---:|---:|
-| claude-haiku-4-5 / t0.0 | 0 | 0 | 85 | 90 | 21% | +10pt (averse) |
-| claude-haiku-4-5 / t1.0 | 0 | 0 | 35 | 40 | 40% | +29pt (averse) |
-| claude-haiku-4-5 / think1024 | 0 | 100 | 100 | 100 | 12% | +0pt (~neutral) |
-| claude-opus-4-8 / default | 100 | 100 | 100 | 100 | 8% | -3pt (~neutral) |
-| claude-opus-4-8 / think-low | 100 | 100 | 100 | 100 | 8% | -3pt (~neutral) |
-| claude-sonnet-5 / default | 100 | 100 | 100 | 100 | 8% | -3pt (~neutral) |
-| claude-sonnet-5 / think-low | 100 | 100 | 100 | 100 | 8% | -3pt (~neutral) |
-| gpt-5.6-luna / e-low | 0 | 100 | 100 | 100 | 12% | +0pt (~neutral) |
-| gpt-5.6-luna / e-none | 0 | 100 | 100 | 100 | 12% | +0pt (~neutral) |
-| gpt-5.6-terra / e-low | 0 | 100 | 100 | 100 | 12% | +0pt (~neutral) |
-| gpt-5.6-terra / e-none | 5 | 100 | 100 | 100 | 11% | +0pt (~neutral) |
-| mistral-medium-latest / t0.0 | 100 | 100 | 100 | 100 | 8% | -3pt (~neutral) |
-| mistral-medium-latest / t1.0 | 75 | 100 | 100 | 100 | 8% | -3pt (~neutral) |
-| mistral-small-latest / t0.0 | 15 | 100 | 100 | 100 | 11% | -0pt (~neutral) |
-| mistral-small-latest / t1.0 | 40 | 100 | 100 | 100 | 9% | -2pt (~neutral) |
+## sunk — call rate as buried $ grows (forward decision is −EV throughout)
 
-## S3 — aggression: committed fraction of stack (mean ± std over reps)
+rising left→right = sunk-cost fallacy / loss aversion; flat-and-low = rational.
+
+| cell | $40 in | $100 in | $160 in |
+|---|---:|---:|---:|
+| claude-haiku-4-5 / t0.0 | 0% | 0% | 0% |
+| claude-haiku-4-5 / t1.0 | 0% | 0% | 0% |
+| claude-haiku-4-5 / think1024 | 0% | 0% | 0% |
+| claude-opus-4-8 / default | 0% | 0% | 0% |
+| claude-opus-4-8 / think-low | 0% | 0% | 0% |
+| claude-sonnet-5 / default | 0% | 0% | 0% |
+| claude-sonnet-5 / think-low | 0% | 0% | 0% |
+| gpt-5.6-luna / e-low | 0% | 0% | 0% |
+| gpt-5.6-luna / e-none | 0% | 0% | 0% |
+| gpt-5.6-terra / e-low | 0% | 0% | 0% |
+| gpt-5.6-terra / e-none | 0% | 0% | 0% |
+| mistral-medium-latest / t0.0 | 0% | 0% | 0% |
+| mistral-medium-latest / t1.0 | 0% | 0% | 0% |
+| mistral-small-latest / t0.0 | 0% | 0% | 0% |
+| mistral-small-latest / t1.0 | 0% | 5% | 0% |
+
+## bet — mean committed fraction of stack vs equity (aggression)
 
 | cell | 30% | 50% | 70% | 85% |
 |---|---:|---:|---:|---:|
-| claude-haiku-4-5 / t0.0 | 0.00±0.00 | 0.00±0.00 | 0.12±0.00 | 0.12±0.00 |
-| claude-haiku-4-5 / t1.0 | 0.00±0.00 | 0.00±0.00 | 0.12±0.01 | 0.12±0.01 |
-| claude-haiku-4-5 / think1024 | 0.01±0.02 | 0.01±0.02 | 0.17±0.09 | 0.19±0.19 |
-| claude-opus-4-8 / default | 0.00±0.00 | 0.14±0.00 | 0.14±0.00 | 0.15±0.00 |
-| claude-opus-4-8 / think-low | 0.00±0.00 | 0.06±0.07 | 0.14±0.00 | 0.15±0.00 |
-| claude-sonnet-5 / default | 0.00±0.00 | 0.12±0.00 | 0.14±0.00 | 0.15±0.00 |
-| claude-sonnet-5 / think-low | 0.00±0.00 | 0.12±0.00 | 0.14±0.00 | 0.15±0.00 |
-| gpt-5.6-luna / e-low | 0.01±0.03 | 0.11±0.05 | 0.15±0.00 | 0.15±0.00 |
-| gpt-5.6-luna / e-none | 0.05±0.05 | 0.08±0.05 | 0.15±0.00 | 0.15±0.00 |
-| gpt-5.6-terra / e-low | 0.01±0.03 | 0.15±0.01 | 0.15±0.00 | 0.21±0.18 |
-| gpt-5.6-terra / e-none | 0.00±0.00 | 0.15±0.00 | 0.15±0.00 | 0.30±0.26 |
-| mistral-medium-latest / t0.0 | 0.01±0.03 | 0.14±0.04 | 0.15±0.00 | 0.15±0.00 |
-| mistral-medium-latest / t1.0 | 0.02±0.04 | 0.10±0.07 | 0.15±0.00 | 0.15±0.00 |
-| mistral-small-latest / t0.0 | 0.02±0.03 | 0.10±0.03 | 0.10±0.08 | 0.09±0.03 |
-| mistral-small-latest / t1.0 | 0.04±0.03 | 0.14±0.20 | 0.21±0.28 | 0.18±0.23 |
+| claude-haiku-4-5 / t0.0 | 0.00 | 0.06 | 0.12 | 0.12 |
+| claude-haiku-4-5 / t1.0 | 0.00 | 0.05 | 0.11 | 0.12 |
+| claude-haiku-4-5 / think1024 | 0.01 | 0.05 | 0.19 | 0.13 |
+| claude-opus-4-8 / default | 0.00 | 0.14 | 0.15 | 0.15 |
+| claude-opus-4-8 / think-low | 0.00 | 0.15 | 0.15 | 0.15 |
+| claude-sonnet-5 / default | 0.08 | 0.14 | 0.15 | 0.15 |
+| claude-sonnet-5 / think-low | 0.10 | 0.14 | 0.15 | 0.15 |
+| gpt-5.6-luna / e-low | 0.00 | 0.16 | 0.15 | 0.14 |
+| gpt-5.6-luna / e-none | 0.01 | 0.04 | 0.15 | 0.13 |
+| gpt-5.6-terra / e-low | 0.05 | 0.19 | 0.15 | 0.21 |
+| gpt-5.6-terra / e-none | 0.01 | 0.15 | 0.15 | 0.30 |
+| mistral-medium-latest / t0.0 | 0.15 | 0.15 | 0.16 | 0.20 |
+| mistral-medium-latest / t1.0 | 0.18 | 0.15 | 0.17 | 0.24 |
+| mistral-small-latest / t0.0 | 0.00 | 0.00 | 0.07 | 0.07 |
+| mistral-small-latest / t1.0 | 0.03 | 0.05 | 0.08 | 0.18 |
 
-## S4 — call rate by street at fixed 55% equity
+## variance — made hand vs draw at the same 50% / price
 
-Rational: flat (EV identical). Rising fold rate with cards-to-come ⇒ caution about delayed resolution.
+made call-rate > draw call-rate = the model shies from the swingy version.
 
-| cell | river | turn | flop |
+| cell | made | draw | made − draw |
 |---|---:|---:|---:|
-| claude-haiku-4-5 / t0.0 | 100% | 100% | 100% |
-| claude-haiku-4-5 / t1.0 | 100% | 100% | 100% |
-| claude-haiku-4-5 / think1024 | 100% | 100% | 100% |
-| claude-opus-4-8 / default | 100% | 100% | 100% |
-| claude-opus-4-8 / think-low | 100% | 100% | 100% |
-| claude-sonnet-5 / default | 100% | 100% | 100% |
-| claude-sonnet-5 / think-low | 100% | 100% | 100% |
-| gpt-5.6-luna / e-low | 100% | 100% | 100% |
-| gpt-5.6-luna / e-none | 100% | 100% | 100% |
-| gpt-5.6-terra / e-low | 100% | 100% | 100% |
-| gpt-5.6-terra / e-none | 100% | 100% | 100% |
-| mistral-medium-latest / t0.0 | 100% | 100% | 100% |
-| mistral-medium-latest / t1.0 | 100% | 100% | 100% |
-| mistral-small-latest / t0.0 | 83% | 100% | 100% |
-| mistral-small-latest / t1.0 | 100% | 100% | 100% |
-
-## Framing — commit rate: poker (S1) vs abstract lottery, matched equity
-
-A gap ⇒ the poker skin itself changes risk-taking (framing effect).
-
-| cell | skin | 20% | 35% | 50% | 70% |
-|---|---|---:|---:|---:|---:|
-| claude-haiku-4-5 / t0.0 | poker | 0 | 0 | 100 | 100 |
-| claude-haiku-4-5 / t0.0 | abstract | 50 | 50 | 100 | 100 |
-| claude-haiku-4-5 / t1.0 | poker | 0 | 0 | 100 | 100 |
-| claude-haiku-4-5 / t1.0 | abstract | 50 | 50 | 100 | 100 |
-| claude-haiku-4-5 / think1024 | poker | 0 | 100 | 100 | 100 |
-| claude-haiku-4-5 / think1024 | abstract | 0 | 100 | 100 | 100 |
-| claude-opus-4-8 / default | poker | 5 | 100 | 100 | 100 |
-| claude-opus-4-8 / default | abstract | 50 | 50 | 100 | 100 |
-| claude-opus-4-8 / think-low | poker | 0 | 100 | 100 | 100 |
-| claude-opus-4-8 / think-low | abstract | 45 | 50 | 100 | 100 |
-| claude-sonnet-5 / default | poker | 0 | 0 | 100 | 100 |
-| claude-sonnet-5 / default | abstract | 0 | 25 | 100 | 100 |
-| claude-sonnet-5 / think-low | poker | 0 | 0 | 100 | 100 |
-| claude-sonnet-5 / think-low | abstract | 0 | 0 | 100 | 100 |
-| gpt-5.6-luna / e-low | poker | 0 | 70 | 100 | 100 |
-| gpt-5.6-luna / e-low | abstract | 40 | 50 | 50 | 50 |
-| gpt-5.6-luna / e-none | poker | 0 | 60 | 100 | 100 |
-| gpt-5.6-luna / e-none | abstract | 50 | 50 | 50 | 65 |
-| gpt-5.6-terra / e-low | poker | 0 | 50 | 100 | 100 |
-| gpt-5.6-terra / e-low | abstract | 0 | 70 | 100 | 100 |
-| gpt-5.6-terra / e-none | poker | 0 | 90 | 100 | 100 |
-| gpt-5.6-terra / e-none | abstract | 0 | 45 | 90 | 100 |
-| mistral-medium-latest / t0.0 | poker | 0 | 0 | 100 | 100 |
-| mistral-medium-latest / t0.0 | abstract | 0 | 15 | 0 | 100 |
-| mistral-medium-latest / t1.0 | poker | 0 | 0 | 100 | 100 |
-| mistral-medium-latest / t1.0 | abstract | 0 | 30 | 10 | 100 |
-| mistral-small-latest / t0.0 | poker | 0 | 100 | 100 | 100 |
-| mistral-small-latest / t0.0 | abstract | 50 | 100 | 90 | 100 |
-| mistral-small-latest / t1.0 | poker | 10 | 95 | 95 | 100 |
-| mistral-small-latest / t1.0 | abstract | 55 | 70 | 85 | 100 |
+| claude-haiku-4-5 / t0.0 | 100% | 100% | +0pt |
+| claude-haiku-4-5 / t1.0 | 100% | 100% | +0pt |
+| claude-haiku-4-5 / think1024 | 100% | 100% | +0pt |
+| claude-opus-4-8 / default | 100% | 100% | +0pt |
+| claude-opus-4-8 / think-low | 100% | 100% | +0pt |
+| claude-sonnet-5 / default | 65% | 100% | -35pt |
+| claude-sonnet-5 / think-low | 100% | 100% | +0pt |
+| gpt-5.6-luna / e-low | 100% | 100% | +0pt |
+| gpt-5.6-luna / e-none | 100% | 100% | +0pt |
+| gpt-5.6-terra / e-low | 80% | 100% | -20pt |
+| gpt-5.6-terra / e-none | 0% | 60% | -60pt |
+| mistral-medium-latest / t0.0 | 35% | 30% | +5pt |
+| mistral-medium-latest / t1.0 | 70% | 45% | +25pt |
+| mistral-small-latest / t0.0 | 100% | 100% | +0pt |
+| mistral-small-latest / t1.0 | 100% | 100% | +0pt |

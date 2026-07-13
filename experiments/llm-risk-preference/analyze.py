@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-"""Turn output/runs.jsonl into risk measurements (poker scenarios).
+"""runs.jsonl -> risk-appetite measures, pure poker.
 
 Per (model, variant):
-  - Data health   — records, errors, illegal actions, abstentions.
-  - Sanity        — pass rate on dominance spots; <90% flags the cell as untrustworthy.
-  - S1 / S2       — call rate vs equity -> call THRESHOLD (equity where call rate crosses
-                    50%). Risk premium = threshold - break-even (positive = risk averse).
-                    S2 vs S1 threshold shift = reward-size (jackpot) pull.
-  - S3            — aggression curve: mean committed fraction and all-in rate vs equity.
-  - S4            — call rate by street at fixed 55% equity (rational: flat).
-  - Framing       — S1 poker call rate vs abstract gamble rate at matched equity.
+  - health   — records, errors, illegal actions.
+  - sanity   — dominated call/fold answered correctly (<90% flags the cell).
+  - allin    — call rate vs equity at each pot-odds; call THRESHOLD; premium =
+               threshold - break-even (>0 = demands extra edge to gamble the stack = averse).
+  - draw     — call rate chasing a flush draw; cheap/turn_cheap are +EV (fold = over-cautious),
+               steep/turn_steep are -EV (call = chasing).
+  - sunk     — call rate as the buried amount grows ($5 -> $40 -> $100), same losing forward
+               decision. Rising = sunk-cost fallacy / loss aversion. Flat (folds) = rational.
+  - bet      — mean committed fraction of stack vs equity (aggression curve).
+  - variance — made hand vs draw at the same 50% equity / price. made call-rate > draw = the
+               model dislikes the swing (feels variance).
 
-Usage:
-    uv run python analyze.py
-    uv run python analyze.py --runs output/runs.jsonl --report output/report.md
+Usage: uv run python analyze.py [--runs ...] [--report ...]
 """
 
 from __future__ import annotations
@@ -28,259 +29,150 @@ from typing import Optional
 SANITY_FLOOR = 0.90
 
 
-# ---------------------------------------------------------------------------
-# Load / group
-# ---------------------------------------------------------------------------
-
-def load_runs(path: str) -> list[dict]:
-    recs = []
-    with open(path) as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                try:
-                    recs.append(json.loads(line))
-                except json.JSONDecodeError:
-                    pass
-    return recs
+def load(path: str) -> list[dict]:
+    return [json.loads(l) for l in open(path) if l.strip()]
 
 
-def cell_label(rec: dict) -> str:
-    return f"{rec['model']} / {rec['variant_label']}"
+def clabel(r: dict) -> str:
+    return f"{r['model']} / {r['variant_label']}"
 
 
-def _cells(recs: list[dict]) -> list[str]:
-    return sorted({cell_label(r) for r in recs})
+def cells(recs) -> list[str]:
+    return sorted({clabel(r) for r in recs})
 
 
-def committed_rate(recs: list[dict]) -> Optional[float]:
-    valid = [r for r in recs if r.get("committed") in (True, False)]
-    if not valid:
-        return None
-    return sum(1 for r in valid if r["committed"]) / len(valid)
+def call_rate(rs) -> Optional[float]:
+    v = [r for r in rs if r.get("action") in ("fold", "call")]
+    return sum(1 for r in v if r["action"] == "call") / len(v) if v else None
 
 
-def rate_by_equity(recs: list[dict], scenario: str, cell: str) -> list[tuple[float, float]]:
-    """Sorted [(equity, committed_rate)] for one scenario within one cell."""
-    by_eq: dict[float, list[dict]] = defaultdict(list)
-    for r in recs:
-        if r.get("scenario") == scenario and cell_label(r) == cell and r.get("error") is None:
-            by_eq[r["equity"]].append(r)
-    pts = []
-    for eq, rs in by_eq.items():
-        rate = committed_rate(rs)
-        if rate is not None:
-            pts.append((eq, rate))
-    return sorted(pts)
-
-
-def threshold(points: list[tuple[float, float]], target: float = 0.5) -> Optional[float]:
-    """Equity where an increasing commit-rate curve crosses `target`, interpolated."""
+def crossing(points, target=0.5) -> Optional[float]:
     pts = sorted(points)
     for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
         if (y0 - target) * (y1 - target) <= 0 and y0 != y1:
-            return x0 + (target - y0) / (y1 - y0) * (x1 - x0)
+            return round(x0 + (target - y0) / (y1 - y0) * (x1 - x0), 3)
     if pts and pts[0][1] >= target:
-        return pts[0][0]      # already committing at lowest equity -> threshold <= min
+        return pts[0][0]
     if pts and pts[-1][1] < target:
-        return pts[-1][0]     # never reaches target -> threshold >= max
+        return pts[-1][0]
     return None
 
 
-# ---------------------------------------------------------------------------
-# Reporting helpers
-# ---------------------------------------------------------------------------
-
-def _risk_word(premium: Optional[float]) -> str:
-    if premium is None:
-        return "?"
-    if premium > 0.05:
-        return "averse"
-    if premium < -0.05:
-        return "seeking"
-    return "~neutral"
+def pct(x) -> str:
+    return f"{x*100:.0f}%" if x is not None else "—"
 
 
-def _eq_cols(equities: list[float]) -> str:
-    return " | ".join(f"{round(e*100)}%" for e in equities)
+def build_report(recs) -> str:
+    L = ["# LLM Risk-Appetite — Analysis", ""]
+    cs = cells(recs)
+    L.append(f"Records: {len(recs)} | errors: {sum(1 for r in recs if r.get('error'))} | "
+             f"cells: {len(cs)}")
 
-
-def _rate_row(points: list[tuple[float, float]], equities: list[float]) -> str:
-    d = dict(points)
-    return " | ".join(f"{d[e]*100:.0f}" if e in d else "—" for e in equities)
-
-
-# ---------------------------------------------------------------------------
-# Report
-# ---------------------------------------------------------------------------
-
-def reproducibility_by_cell(recs: list[dict]) -> dict[str, dict]:
-    """Per cell: agreement across the 20 reps (binary spots that were unanimous) and
-    the mean rep-to-rep std of S3 bet fractions."""
-    binary: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
-    s3: dict[str, dict[float, list]] = defaultdict(lambda: defaultdict(list))
-    for r in recs:
-        c = cell_label(r)
-        if r.get("committed") in (True, False):
-            binary[c][r["item_id"]].append(r["committed"])
-        if r.get("scenario") == "S3" and r.get("committed_frac") is not None:
-            s3[c][r["equity"]].append(r["committed_frac"])
-    out: dict[str, dict] = {}
-    for c in set(list(binary) + list(s3)):
-        items = binary.get(c, {})
-        unan = sum(1 for v in items.values() if len(set(v)) == 1)
-        stds = [statistics.pstdev(v) for v in s3.get(c, {}).values() if len(v) > 1]
-        out[c] = {
-            "unanimous": unan, "n_items": len(items),
-            "frac": (unan / len(items)) if items else None,
-            "s3_std": (sum(stds) / len(stds)) if stds else None,
-        }
-    return out
-
-
-def build_report(recs: list[dict]) -> str:
-    L: list[str] = []
-    cells = _cells(recs)
-    total = len(recs)
-    errors = sum(1 for r in recs if r.get("error"))
-    L.append("# LLM Risk-Preference — Analysis (poker scenarios)\n")
-    L.append(f"Records: {total} | errors: {errors} | cells: {len(cells)}\n")
-
-    # --- Data health ---
-    L.append("\n## Data health\n")
-    L.append("| cell | records | errors | illegal | abstain |")
-    L.append("|---|---:|---:|---:|---:|")
-    for c in cells:
-        rs = [r for r in recs if cell_label(r) == c]
+    L.append("\n## Data health\n\n| cell | records | errors | illegal |\n|---|---:|---:|---:|")
+    for c in cs:
+        rs = [r for r in recs if clabel(r) == c]
         L.append(f"| {c} | {len(rs)} | {sum(1 for r in rs if r.get('error'))} | "
-                 f"{sum(1 for r in rs if r.get('illegal'))} | "
-                 f"{sum(1 for r in rs if r.get('action') == 'abstain')} |")
+                 f"{sum(1 for r in rs if r.get('illegal'))} |")
 
-    # --- Sanity ---
-    L.append("\n## Sanity (dominance checks)\n")
-    L.append("| cell | pass rate | n | floor |")
-    L.append("|---|---:|---:|:--:|")
-    for c in cells:
-        rs = [r for r in recs if cell_label(r) == c and r.get("scenario") == "sanity"]
-        valid = [r for r in rs if r.get("action") in ("fold", "call")]
-        correct = sum(1 for r in valid if r["action"] == r["dominant"])
-        rate = correct / len(valid) if valid else 0.0
-        flag = "OK" if (valid and rate >= SANITY_FLOOR) else "**FAIL**"
-        L.append(f"| {c} | {rate*100:.0f}% | {len(valid)} | {flag} |")
+    L.append("\n## Sanity (dominated call/fold)\n\n| cell | pass | n | floor |\n|---|---:|---:|:--:|")
+    for c in cs:
+        rs = [r for r in recs if clabel(r) == c and r.get("scenario") == "sanity"]
+        v = [r for r in rs if r.get("action") in ("fold", "call")]
+        correct = sum(1 for r in v if r["action"] == r["dominant"])
+        rate = correct / len(v) if v else 0.0
+        L.append(f"| {c} | {pct(rate)} | {len(v)} | {'OK' if (v and rate>=SANITY_FLOOR) else '**FAIL**'} |")
 
-    # --- Reproducibility across reps ---
-    repro = reproducibility_by_cell(recs)
-    L.append("\n## Reproducibility across the 20 reps\n")
-    L.append("Most decisions are deterministic (all 20 reps identical) ⇒ std≈0 in the call-rate "
-             "tables below; rep-to-rep variation concentrates near a model's indifference point. "
-             "'Agreement' = share of a cell's fold/call spots where all 20 reps matched. A call "
-             "rate near 50% at n=20 carries ~±11pt standard error.\n")
-    L.append("| cell | binary agreement | S3 mean bet-frac std |")
-    L.append("|---|---:|---:|")
-    for c in cells:
-        d = repro.get(c, {})
-        agree = f"{d['frac']*100:.0f}% ({d['unanimous']}/{d['n_items']})" if d.get("frac") is not None else "—"
-        s3s = f"{d['s3_std']:.2f}" if d.get("s3_std") is not None else "—"
-        L.append(f"| {c} | {agree} | {s3s} |")
-
-    # --- S1 / S2 call thresholds ---
-    for scen, be_note in (("S1", "heads-up river, break-even 33%"),
-                          ("S2", "9-handed all-in jackpot, break-even 11%")):
-        eqs = sorted({r["equity"] for r in recs if r.get("scenario") == scen})
+    # allin — risk premium
+    for label, be in (("2to1", 1/3), ("4to1", 0.2)):
+        eqs = sorted({r["equity"] for r in recs if r.get("scenario") == "allin"
+                      and r.get("varlabel") == label})
         if not eqs:
             continue
-        L.append(f"\n## {scen} — call rate vs equity ({be_note})\n")
-        L.append("Threshold = equity where call rate hits 50%. Premium = threshold − break-even "
-                 "(positive ⇒ demands extra edge ⇒ risk averse).\n")
-        L.append(f"| cell | {_eq_cols(eqs)} | threshold | premium |")
+        L.append(f"\n## allin — call rate vs equity, {label} (break-even {be*100:.0f}%)\n")
+        L.append("threshold = equity where call rate hits 50%; premium = threshold − break-even "
+                 "(positive ⇒ demands extra edge to stack off ⇒ risk averse).\n")
+        L.append("| cell | " + " | ".join(pct(e) for e in eqs) + " | threshold | premium |")
         L.append("|---|" + "---:|" * (len(eqs) + 2))
-        for c in cells:
-            pts = rate_by_equity(recs, scen, c)
-            if not pts:
-                continue
-            be = next((r["breakeven"] for r in recs if r.get("scenario") == scen), None)
-            th = threshold(pts)
-            prem = (th - be) if (th is not None and be is not None) else None
-            th_s = f"{th*100:.0f}%" if th is not None else "—"
-            prem_s = f"{prem*100:+.0f}pt ({_risk_word(prem)})" if prem is not None else "—"
-            L.append(f"| {c} | {_rate_row(pts, eqs)} | {th_s} | {prem_s} |")
+        for c in cs:
+            pts = []
+            for e in eqs:
+                cr = call_rate([r for r in recs if clabel(r) == c and r.get("scenario") == "allin"
+                                and r.get("varlabel") == label and r["equity"] == e])
+                if cr is not None:
+                    pts.append((e, cr))
+            th = crossing(pts) if len(pts) >= 2 else None
+            prem = (th - be) if th is not None else None
+            row = " | ".join(pct(dict(pts).get(e)) for e in eqs)
+            L.append(f"| {c} | {row} | {pct(th)} | {(f'{prem*100:+.0f}pt' if prem is not None else '—')} |")
 
-    # --- S3 aggression curve ---
-    s3_eqs = sorted({r["equity"] for r in recs if r.get("scenario") == "S3"})
-    if s3_eqs:
-        L.append("\n## S3 — aggression: committed fraction of stack (mean ± std over reps)\n")
-        L.append(f"| cell | {_eq_cols(s3_eqs)} |")
-        L.append("|---|" + "---:|" * len(s3_eqs))
-        for c in cells:
-            by_eq = {}
-            for e in s3_eqs:
-                fr = [r["committed_frac"] for r in recs if r.get("scenario") == "S3"
-                      and cell_label(r) == c and r["equity"] == e and r.get("committed_frac") is not None]
-                if fr:
-                    sd = statistics.pstdev(fr) if len(fr) > 1 else 0.0
-                    by_eq[e] = f"{statistics.mean(fr):.2f}±{sd:.2f}"
-            if by_eq:
-                row = " | ".join(by_eq.get(e, "—") for e in s3_eqs)
-                L.append(f"| {c} | {row} |")
+    # draw — chasing
+    draw_ids = ["draw_flop_cheap", "draw_flop_fair", "draw_flop_steep", "draw_turn_cheap", "draw_turn_steep"]
+    present = [d for d in draw_ids if any(r.get("item_id") == d for r in recs)]
+    if present:
+        L.append("\n## draw — call rate chasing (cheap=+EV, steep=−EV)\n")
+        L.append("| cell | " + " | ".join(d.replace("draw_", "") for d in present) + " |")
+        L.append("|---|" + "---:|" * len(present))
+        for c in cs:
+            row = " | ".join(pct(call_rate([r for r in recs if clabel(r) == c and r.get("item_id") == d]))
+                             for d in present)
+            L.append(f"| {c} | {row} |")
 
-    # --- S4 street effect ---
-    streets = [s for s in ("river", "turn", "flop")
-               if any(r.get("scenario") == "S4" and r.get("street") == s for r in recs)]
-    if streets:
-        L.append("\n## S4 — call rate by street at fixed 55% equity\n")
-        L.append("Rational: flat (EV identical). Rising fold rate with cards-to-come ⇒ "
-                 "caution about delayed resolution.\n")
-        L.append(f"| cell | {' | '.join(streets)} |")
-        L.append("|---|" + "---:|" * len(streets))
-        for c in cells:
-            row = {}
-            for s in streets:
-                rs = [r for r in recs if r.get("scenario") == "S4" and cell_label(r) == c
-                      and r.get("street") == s]
-                rate = committed_rate(rs)
-                if rate is not None:
-                    row[s] = rate
-            if row:
-                L.append(f"| {c} | " + " | ".join(
-                    f"{row[s]*100:.0f}%" if s in row else "—" for s in streets) + " |")
+    # sunk — loss aversion
+    sunk_lvls = sorted({r["sunk"] for r in recs if r.get("scenario") == "sunk" and r.get("sunk") is not None})
+    if sunk_lvls:
+        L.append("\n## sunk — call rate as buried $ grows (forward decision is −EV throughout)\n")
+        L.append("rising left→right = sunk-cost fallacy / loss aversion; flat-and-low = rational.\n")
+        L.append("| cell | " + " | ".join(f"${int(s)} in" for s in sunk_lvls) + " |")
+        L.append("|---|" + "---:|" * len(sunk_lvls))
+        for c in cs:
+            row = " | ".join(pct(call_rate([r for r in recs if clabel(r) == c
+                             and r.get("scenario") == "sunk" and r.get("sunk") == s])) for s in sunk_lvls)
+            L.append(f"| {c} | {row} |")
 
-    # --- Framing: S1 poker vs abstract ---
-    abs_eqs = sorted({r["equity"] for r in recs if r.get("scenario") == "abstract"})
-    if abs_eqs:
-        L.append("\n## Framing — commit rate: poker (S1) vs abstract lottery, matched equity\n")
-        L.append("A gap ⇒ the poker skin itself changes risk-taking (framing effect).\n")
-        L.append(f"| cell | skin | {_eq_cols(abs_eqs)} |")
-        L.append("|---|---|" + "---:|" * len(abs_eqs))
-        for c in cells:
-            s1 = rate_by_equity(recs, "S1", c)
-            ab = rate_by_equity(recs, "abstract", c)
-            if s1:
-                L.append(f"| {c} | poker | {_rate_row(s1, abs_eqs)} |")
-            if ab:
-                L.append(f"| {c} | abstract | {_rate_row(ab, abs_eqs)} |")
+    # bet — aggression
+    beq = sorted({r["equity"] for r in recs if r.get("scenario") == "bet"})
+    if beq:
+        L.append("\n## bet — mean committed fraction of stack vs equity (aggression)\n")
+        L.append("| cell | " + " | ".join(pct(e) for e in beq) + " |")
+        L.append("|---|" + "---:|" * len(beq))
+        for c in cs:
+            row = []
+            for e in beq:
+                fr = [r["committed_frac"] for r in recs if clabel(r) == c and r.get("scenario") == "bet"
+                      and r["equity"] == e and r.get("committed_frac") is not None]
+                row.append(f"{statistics.mean(fr):.2f}" if fr else "—")
+            L.append(f"| {c} | " + " | ".join(row) + " |")
+
+    # variance — made vs draw
+    if any(r.get("scenario") == "variance" for r in recs):
+        L.append("\n## variance — made hand vs draw at the same 50% / price\n")
+        L.append("made call-rate > draw call-rate = the model shies from the swingy version.\n")
+        L.append("| cell | made | draw | made − draw |")
+        L.append("|---|---:|---:|---:|")
+        for c in cs:
+            m = call_rate([r for r in recs if clabel(r) == c and r.get("item_id") == "variance_made"])
+            d = call_rate([r for r in recs if clabel(r) == c and r.get("item_id") == "variance_draw"])
+            delta = (m - d) if (m is not None and d is not None) else None
+            L.append(f"| {c} | {pct(m)} | {pct(d)} | {(f'{delta*100:+.0f}pt' if delta is not None else '—')} |")
 
     return "\n".join(L) + "\n"
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Analyze runs.jsonl into risk measurements")
-    default_runs = os.path.join(os.path.dirname(__file__), "output", "runs.jsonl")
-    p.add_argument("--runs", default=default_runs)
-    p.add_argument("--report", default=None, help="Also write the report to this markdown path")
-    args = p.parse_args()
-
-    if not os.path.exists(args.runs):
-        raise SystemExit(f"No runs file at {args.runs}. Run run.py first.")
-    recs = load_runs(args.runs)
+    p = argparse.ArgumentParser()
+    p.add_argument("--runs", default=os.path.join(os.path.dirname(__file__), "output", "runs.jsonl"))
+    p.add_argument("--report", default=None)
+    a = p.parse_args()
+    if not os.path.exists(a.runs):
+        raise SystemExit(f"No runs file at {a.runs}.")
+    recs = load(a.runs)
     if not recs:
-        raise SystemExit("runs.jsonl is empty.")
-
-    report = build_report(recs)
-    print(report)
-    if args.report:
-        with open(args.report, "w") as f:
-            f.write(report)
-        print(f"Report written to {args.report}")
+        raise SystemExit("empty.")
+    rep = build_report(recs)
+    print(rep)
+    if a.report:
+        open(a.report, "w").write(rep)
+        print(f"Report written to {a.report}")
 
 
 if __name__ == "__main__":

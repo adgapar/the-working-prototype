@@ -1,0 +1,3025 @@
+{
+  "meta": {
+    "total": 6600,
+    "errors": 0,
+    "illegal": 0,
+    "cells": 15
+  },
+  "cells": {
+    "claude-haiku-4-5 / t0.0": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.475,
+          "premium": 0.142,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 0.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.4,
+          "premium": 0.2,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.0,
+            "0.4": 0.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.0,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.06,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.12,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.12,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.2,
+        "stackoff_averse": true,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "claude-haiku-4-5 / t1.0": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.475,
+          "premium": 0.142,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 0.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.4,
+          "premium": 0.2,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.0,
+            "0.4": 0.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.0,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.052,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.112,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.123,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.2,
+        "stackoff_averse": true,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "claude-haiku-4-5 / think1024": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.329,
+          "premium": -0.004,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 0.95,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 19,
+              "fold": 1,
+              "n": 20,
+              "call_rate": 0.95
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 0.9,
+          "counts": {
+            "call": 18,
+            "fold": 2,
+            "n": 20,
+            "call_rate": 0.9
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 0.35,
+          "counts": {
+            "call": 7,
+            "fold": 13,
+            "n": 20,
+            "call_rate": 0.35
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.007,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.051,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.188,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.133,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.004,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": false,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "claude-opus-4-8 / default": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.325,
+          "premium": -0.008,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.0,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.143,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.149,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.008,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "claude-opus-4-8 / think-low": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.325,
+          "premium": -0.008,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.0,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.146,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.149,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.008,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "claude-sonnet-5 / default": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.475,
+          "premium": 0.142,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 0.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.076,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.142,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.146,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 0.65,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": -0.35,
+        "counts": {
+          "made": {
+            "call": 13,
+            "fold": 7,
+            "n": 20,
+            "call_rate": 0.65
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.142,
+        "stackoff_averse": true,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "claude-sonnet-5 / think-low": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.475,
+          "premium": 0.142,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 0.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.104,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.142,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.148,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.142,
+        "stackoff_averse": true,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "gpt-5.6-luna / e-low": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.325,
+          "premium": -0.008,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.188,
+          "premium": -0.012,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.95,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 19,
+              "fold": 1,
+              "n": 20,
+              "call_rate": 0.95
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.0,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.158,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.148,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.141,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.008,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "gpt-5.6-luna / e-none": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.25,
+          "premium": -0.083,
+          "call_rate_by_equity": {
+            "0.25": 0.95,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 19,
+              "fold": 1,
+              "n": 20,
+              "call_rate": 0.95
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.005,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.04,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.129,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.015,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "gpt-5.6-terra / e-low": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.306,
+          "premium": -0.027,
+          "call_rate_by_equity": {
+            "0.25": 0.2,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 4,
+              "fold": 16,
+              "n": 20,
+              "call_rate": 0.2
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.192,
+          "premium": -0.008,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.9,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 18,
+              "fold": 2,
+              "n": 20,
+              "call_rate": 0.9
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 0.55,
+          "counts": {
+            "call": 11,
+            "fold": 9,
+            "n": 20,
+            "call_rate": 0.55
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 0.55,
+          "counts": {
+            "call": 11,
+            "fold": 9,
+            "n": 20,
+            "call_rate": 0.55
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.053,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.191,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.149,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.21,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 0.8,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": -0.2,
+        "counts": {
+          "made": {
+            "call": 16,
+            "fold": 4,
+            "n": 20,
+            "call_rate": 0.8
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.008,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "gpt-5.6-terra / e-none": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.325,
+          "premium": -0.008,
+          "call_rate_by_equity": {
+            "0.25": 0.05,
+            "0.4": 0.95,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 1,
+              "fold": 19,
+              "n": 20,
+              "call_rate": 0.05
+            },
+            "0.4": {
+              "call": 19,
+              "fold": 1,
+              "n": 20,
+              "call_rate": 0.95
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.185,
+          "premium": -0.015,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 1.0,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.006,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.15,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.3,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 0.0,
+        "draw_call_rate": 0.6,
+        "made_minus_draw": -0.6,
+        "counts": {
+          "made": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          },
+          "draw": {
+            "call": 12,
+            "fold": 8,
+            "n": 20,
+            "call_rate": 0.6
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.008,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": false,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "mistral-medium-latest / t0.0": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.325,
+          "premium": -0.008,
+          "call_rate_by_equity": {
+            "0.25": 0.0,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.321,
+          "premium": 0.121,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.05,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 1,
+              "fold": 19,
+              "n": 20,
+              "call_rate": 0.05
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.148,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.152,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.158,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.2,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 0.35,
+        "draw_call_rate": 0.3,
+        "made_minus_draw": 0.05,
+        "counts": {
+          "made": {
+            "call": 7,
+            "fold": 13,
+            "n": 20,
+            "call_rate": 0.35
+          },
+          "draw": {
+            "call": 6,
+            "fold": 14,
+            "n": 20,
+            "call_rate": 0.3
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.121,
+        "stackoff_averse": true,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "mistral-medium-latest / t1.0": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.329,
+          "premium": -0.004,
+          "call_rate_by_equity": {
+            "0.25": 0.05,
+            "0.4": 0.9,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 1,
+              "fold": 19,
+              "n": 20,
+              "call_rate": 0.05
+            },
+            "0.4": {
+              "call": 18,
+              "fold": 2,
+              "n": 20,
+              "call_rate": 0.9
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.291,
+          "premium": 0.091,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.35,
+            "0.4": 0.9
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 7,
+              "fold": 13,
+              "n": 20,
+              "call_rate": 0.35
+            },
+            "0.4": {
+              "call": 18,
+              "fold": 2,
+              "n": 20,
+              "call_rate": 0.9
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 0.95,
+          "counts": {
+            "call": 19,
+            "fold": 1,
+            "n": 20,
+            "call_rate": 0.95
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.179,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.151,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.17,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.24,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 0.7,
+        "draw_call_rate": 0.45,
+        "made_minus_draw": 0.25,
+        "counts": {
+          "made": {
+            "call": 14,
+            "fold": 6,
+            "n": 20,
+            "call_rate": 0.7
+          },
+          "draw": {
+            "call": 9,
+            "fold": 11,
+            "n": 20,
+            "call_rate": 0.45
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.091,
+        "stackoff_averse": true,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": true
+      }
+    },
+    "mistral-small-latest / t0.0": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.25,
+          "premium": -0.083,
+          "call_rate_by_equity": {
+            "0.25": 0.75,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 15,
+              "fold": 5,
+              "n": 20,
+              "call_rate": 0.75
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.228,
+          "premium": 0.028,
+          "call_rate_by_equity": {
+            "0.12": 0.0,
+            "0.25": 0.6,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 0,
+              "fold": 20,
+              "n": 20,
+              "call_rate": 0.0
+            },
+            "0.25": {
+              "call": 12,
+              "fold": 8,
+              "n": 20,
+              "call_rate": 0.6
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.004,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.0,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.07,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.074,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": 0.028,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    },
+    "mistral-small-latest / t1.0": {
+      "health": {
+        "records": 440,
+        "errors": 0,
+        "illegal": 0
+      },
+      "sanity": {
+        "pass_rate": 1.0,
+        "fold_spot_fold_rate": 1.0,
+        "call_spot_call_rate": 1.0,
+        "n": 40
+      },
+      "allin": {
+        "2to1": {
+          "break_even": 0.3333333333333333,
+          "threshold": 0.25,
+          "premium": -0.083,
+          "call_rate_by_equity": {
+            "0.25": 0.65,
+            "0.4": 1.0,
+            "0.55": 1.0
+          },
+          "counts_by_equity": {
+            "0.25": {
+              "call": 13,
+              "fold": 7,
+              "n": 20,
+              "call_rate": 0.65
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            },
+            "0.55": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        },
+        "4to1": {
+          "break_even": 0.2,
+          "threshold": 0.193,
+          "premium": -0.007,
+          "call_rate_by_equity": {
+            "0.12": 0.05,
+            "0.25": 0.85,
+            "0.4": 1.0
+          },
+          "counts_by_equity": {
+            "0.12": {
+              "call": 1,
+              "fold": 19,
+              "n": 20,
+              "call_rate": 0.05
+            },
+            "0.25": {
+              "call": 17,
+              "fold": 3,
+              "n": 20,
+              "call_rate": 0.85
+            },
+            "0.4": {
+              "call": 20,
+              "fold": 0,
+              "n": 20,
+              "call_rate": 1.0
+            }
+          }
+        }
+      },
+      "draw": {
+        "flop_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 57.0
+        },
+        "flop_fair": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -0.1
+        },
+        "flop_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -6.0
+        },
+        "turn_cheap": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": 21.8
+        },
+        "turn_steep": {
+          "call_rate": 1.0,
+          "counts": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "ev_play": -12.4
+        }
+      },
+      "sunk": {
+        "40": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "100": {
+          "call_rate": 0.05,
+          "counts": {
+            "call": 1,
+            "fold": 19,
+            "n": 20,
+            "call_rate": 0.05
+          }
+        },
+        "160": {
+          "call_rate": 0.0,
+          "counts": {
+            "call": 0,
+            "fold": 20,
+            "n": 20,
+            "call_rate": 0.0
+          }
+        },
+        "slope_hi_minus_lo": 0.0
+      },
+      "bet": {
+        "0.3": {
+          "mean_committed_frac": 0.031,
+          "n": 20
+        },
+        "0.5": {
+          "mean_committed_frac": 0.047,
+          "n": 20
+        },
+        "0.7": {
+          "mean_committed_frac": 0.085,
+          "n": 20
+        },
+        "0.85": {
+          "mean_committed_frac": 0.184,
+          "n": 20
+        }
+      },
+      "variance": {
+        "made_call_rate": 1.0,
+        "draw_call_rate": 1.0,
+        "made_minus_draw": 0.0,
+        "counts": {
+          "made": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          },
+          "draw": {
+            "call": 20,
+            "fold": 0,
+            "n": 20,
+            "call_rate": 1.0
+          }
+        }
+      },
+      "profile": {
+        "max_stackoff_premium": -0.007,
+        "stackoff_averse": false,
+        "chases_minus_ev_draw": true,
+        "sunk_cost_fallacy": false,
+        "variance_averse": false
+      }
+    }
+  }
+}
