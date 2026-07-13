@@ -14,16 +14,11 @@ This repository hosts code for these experiments.
 
 ## Experiments
 
-### 1. [Conversation History Coherence](experiments/conversation-history-coherence/)
+### [What kind of poker player is an AI?](experiments/llm-risk-preference/)
 
-**Status**: Ready to run
-**Model**: GPT-4.1
-**Focus**: Testing whether message formatting affects model coherence under adversarial pressure
+Do language models have a stable risk attitude, or does it shift with the wording and the task? This experiment strips poker down to pure priced decisions: the win percentage, the pot, and the price are all given, so it measures risk-taking rather than card-reading. Across 6,600 decisions from seven models (OpenAI, Anthropic, Mistral), it finds three things: they chase losing draws, some turn over-cautious and fold winning all-ins, and none fall for the sunk-cost trap that gets most people.
 
-Testing if passing conversation history as JSON-dumped strings vs. traditional multi-message arrays affects:
-- Boundary maintenance over multi-turn conversations
-- Role consistency and context awareness
-- Resistance to sophisticated jailbreak attacks
+### [In character: does history format affect role coherence?](experiments/conversation-history-coherence/)
 
-Uses promptfoo's red-team with agentic attack strategies (`jailbreak:meta`, `jailbreak:composite`) to generate adaptive adversarial attacks. 180 tests comparing both approaches under identical adversarial conditions.
+Tests whether passing conversation history as text embedded in the user message, versus a native message array, changes how well an agent holds its role under adversarial pressure. The agent is Maya, a recruitment coordinator built on GPT-4.1 with no off-topic guardrails. Uses promptfoo with the Crescendo and GOAT attack strategies over multi-turn sessions, plus a replay method that freezes a turn and runs it fifty times per format to isolate the effect.
 
