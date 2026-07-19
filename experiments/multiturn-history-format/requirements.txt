@@ -1,0 +1,10 @@
+# Math-run path only (thanks to lazy task imports in tasks/tasks.py).
+openai
+gitpython        # utils_log stamps each log with the git commit
+pymongo          # bson.ObjectId for conv ids
+pandas           # imported at top of utils_log
+tqdm
+
+# Optional — only needed if you extend beyond the math task:
+#   sqlparse nltk        # database task
+#   sacrebleu            # translation / data2text / summary tasks
